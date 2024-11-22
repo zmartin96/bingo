@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- english -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!--respond to width of device-->
+    <title>Bingo Card Generator</title>
+    <link rel="stylesheet" href="bingoStyleSheet.css">
+</head>
+<body>
+    <h1>Bingo Card Generator</h1>
+    <div class="container">
+        <div id="bingo-card"></div>
+        <div class="button-panel">
+            <button onclick="generateBingoCard()">Generate Bingo Card</button>
+            <button onclick="downloadBingoCard()">Download as PNG</button>
+            <button onclick="resetBingoCard()">Reset Bingo Card</button>
+            <!-- change background picture of bingo card-->
+            <button class="background-btn" onclick="changeBackground('images/flag.png')">Background 1</button>
+            <button class="background-btn" onclick="changeBackground('images/flag2.webp')">Background 2</button>
+            <button class="background-btn" onclick="changeBackground('background3.png')">Background 3</button>
+        </div>
+    </div>
+    <div id="bingo-message" class="bingo-message"></div>
+    <h2>Policy Bank</h2>
+    <input type="text" id="search-bar" placeholder="Search policies..." onkeyup="filterPolicyBank()">
+    <div id="policy-bank"></div>
+    <!-- used for download png-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="bingoScript.js"></script>
+</body>
+</html>
