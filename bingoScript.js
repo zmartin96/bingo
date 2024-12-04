@@ -1,3 +1,27 @@
+function downloadBingoCardsBulk(count) {
+    const zip = new JSZip();
+    const bingoCard = document.getElementById('bingo-card');
+
+    async function generateCardAndAddToZip(index) {
+        generateBingoCard();  // Generate a new card for each iteration
+        const canvas = await html2canvas(bingoCard, { backgroundColor: null });
+        const dataUrl = canvas.toDataURL().split(',')[1];
+        zip.file(`bingo_card_${index + 1}.png`, dataUrl, { base64: true });
+    }
+
+    (async () => {
+        for (let i = 0; i < count; i++) {
+            await generateCardAndAddToZip(i);
+        }
+        zip.generateAsync({ type: "blob" }).then(content => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(content);
+            link.download = "bingo_cards.zip";
+            link.click();
+        });
+    })();
+}
+
 function resetBingoCard() {
     const cells = document.getElementsByClassName('cell');
     for (let cell of cells) {
@@ -48,7 +72,7 @@ function generateBingoCard() {
     document.getElementById('bingo-message').innerText = '';
 
     let selectedPolicies = policiesData.sort(() => 0.5 - Math.random()).slice(0, 24);
-    selectedPolicies.splice(12, 0, {"Policy": "FREE", "RelevantQuote": "", "Source": ""});
+    selectedPolicies.splice(12, 0, {"Policy": "Insane cabinet picks\n(FREE)", "RelevantQuote": "", "Source": ""});
 
     selectedPolicies.forEach(policy => {
         const cell = document.createElement('div');
@@ -95,7 +119,7 @@ function checkForBingo() {
             highlightWinningPattern(pattern); // highlight winning pattern for each win
         }
         // display bingo message
-        document.getElementById('bingo-message').innerText = '🎉 Bingo! You won! 🎉';
+        document.getElementById('bingo-message').innerText = '🎉 Bingo!\nYou won, we all lose! 🎉';
     }
     else{
         // remove bingo message
@@ -111,21 +135,59 @@ function changeBackground(background) {
 
 // download bingo card as image using html2canvas
 function downloadBingoCard() {
-    html2canvas(document.getElementById('bingo-card')).then(canvas => {
+    const bingoCard = document.getElementById('bingo-card');
+    var img = new Image();
+    
+    html2canvas(bingoCard, {
+        allowTaint: true,
+        //changeBackground: true,
+        //backgroundImages: true,
+        //backgroundImage: window.getComputedStyle(bingoCard).backgroundImage !== 'none' ? window.getComputedStyle(bingoCard).backgroundImage : null,  // Include background
+        //backgroundColor: window.getComputedStyle(bingoCard).backgroundImage !== 'none' ? null : 'white',  // Include background
+        useCORS: true  // Handle background images loaded from different origins
+    }).then(canvas => {
+        //var link = document.getElementById('download');
         const link = document.createElement('a');
+        img=canvas.toDataURL("image/png");
+        //img.src=window.getComputedStyle(bingoCard).backgroundImag;
+        img.src=bingoCard.style.backgroundImage;
+        //link.backgroundImage = window.getComputedStyle(bingoCard).backgroundImage;
         link.download = 'bingo_card.png';
-        link.href = canvas.toDataURL();
+        link.href = img;
         link.click();
     });
 }
+// function downloadBingoCard() {
+//     const background = document.getElementById('bingo-card').style.backgroundImage;
+//     const bingoCard = document.getElementById('bingo-card');
+//     const clone = bingoCard.cloneNode(true);
+
+//     // Append the clone off-screen to preserve layout
+//     clone.style.position = 'absolute';
+//     clone.style.left = '-9999px';
+//     document.body.appendChild(clone);
+
+//     html2canvas(clone, {
+//         useCORS: true, // Handle external images if needed
+//     }).then(canvas => {
+//         document.body.removeChild(clone); // Clean up the clone
+//         const link = document.createElement('a');
+//         const img= new Image();
+//         img.src = canvas.toDataURL(background);
+//         link.backgroundImage = background;
+//         link.download = 'bingo_card.png';
+//         link.href = canvas.toDataURL();
+//         link.click();
+//     });
+// }
 
 // filter policy bank based on search query
 function filterPolicyBank() {
     const query = document.getElementById('search-bar').value.toLowerCase(); // not case-sensitive
     const filteredPolicies = policiesData.filter(policy =>
-        policy.Policy.toLowerCase().includes(query) || policy.RelevantQuote.toLowerCase().includes(query)
+        policy.Policy.toLowerCase().includes(query) || policy.RelevantQuote.toLowerCase().includes(query)|| policy.Source.toLowerCase().includes(query)|| policy.SourceLink.toLowerCase().includes(query)
     );
-    displayPolicyBank(filteredPolicies);
+    displayFilteredBank(filteredPolicies);
 }
 
 // display all policies in the policy bank
@@ -134,7 +196,7 @@ function displayPolicyBank() {
     policyBank.innerHTML = policiesData.map(policy => `
         <div class="policy-item">
             <strong>${policy.Policy}</strong>: ${policy.RelevantQuote}
-            (<a href="${policy.SourceLink}" target="_blank">${policy.SourceLink}</a>)
+            (<a href="${policy.SourceLink}" target="_blank">${policy.Source}</a>)
         </div>
     `).join('<br><br>');
 }
@@ -145,7 +207,7 @@ function displayFilteredBank(filteredPolicies) {
     policyBank.innerHTML = filteredPolicies.map(policy => `
         <div class="policy-item">
             <strong>${policy.Policy}</strong>: ${policy.RelevantQuote}
-            (<a href="${policy.SourceLink}" target="_blank">${policy.SourceLink}</a>)
+            (<a href="${policy.SourceLink}" target="_blank">${policy.Source}</a>)
         </div>
     `).join('<br><br>');
 }
@@ -309,7 +371,7 @@ let policiesData = [
         "SourceLink": "https://www.project2025.org/policy/2"
     },
     {
-        "Policy": "Rounding Up and Deporting All Illegal Immigrants",
+        "Policy": "Rounding Up and Deporting All 'Illegal' Immigrants",
         "RelevantQuote": "Trump plans to revoke Temporary Protected Status for beneficiaries.",
         "Source": "PolitiFact",
         "SourceLink": "https://www.project2025.org/policy/2"
@@ -403,5 +465,35 @@ let policiesData = [
         "RelevantQuote": "We will completely withdraw from the World Health Organization, which has been a disaster for the U.S.",
         "Source": "C-SPAN",
         "SourceLink": "https://www.project2025.org/policy/2"
+    },    
+    {
+        "Policy": "Use public, taxpayer money for private religious schools",
+        "RelevantQuote": "We will clean up our cities by building tent cities for the homeless and removing them from public spaces.",
+        "Source": "Project 2025",
+        "SourceLink": "https://www.project2025.org/policy/2"
+    },
+    {
+        "Policy": "Teachers can not call students nicknames or use preferred pronouns",
+        "RelevantQuote": "No public education employee or contractor shall use a name to address a student other than the name listed on a student’s birth certificate, without the written permission of a student’s parents or guardians.",
+        "Source": "Project 2025 (Page 346)",
+        "SourceLink": "https://www.project2025.org/policy/2"
+    },
+    {
+        "Policy": "Prevent the cancellation of student debt",
+        "RelevantQuote": "The new Administration should urge the Congress to amend the HEA to abrogate, or substantially reduce, the power of the Secretary to cancel, compromise, discharge, or forgive the principal balances of Title IV student loans",
+        "Source": "Project 2025 (Page 354)",
+        "SourceLink": "https://www.project2025.org/policy/2"
+    },
+    {
+        "Policy": "Redirect education funding to foreign",
+        "RelevantQuote": "require the Secretary of Education to allocate at least 40 percent of funding to international business programs that teach about free markets and economics and require institutions, faculty, and fellowship recipients to certify that they intend to further the stated statutory goals of serving American interests",
+        "Source": "Project 2025 (Page 356)",
+        "SourceLink": "https://www.project2025.org/policy/2"
     }
+    // {
+    //     "Policy": "",
+    //     "RelevantQuote": "",
+    //     "Source": "",
+    //     "SourceLink": ""
+    // }
 ];

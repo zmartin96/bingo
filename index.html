@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!--respond to width of device-->
     <title>Bingo Card Generator</title>
     <link rel="stylesheet" href="bingoStyleSheet.css">
+    <link rel="icon" href="favicon.ico" type="image/flag">
 </head>
 <body>
     <h1>Bingo Card Generator</h1>
@@ -12,12 +13,15 @@
         <div id="bingo-card"></div>
         <div class="button-panel">
             <button onclick="generateBingoCard()">Generate Bingo Card</button>
-            <button onclick="downloadBingoCard()">Download as PNG</button>
-            <button onclick="resetBingoCard()">Reset Bingo Card</button>
+            <!-- download bingo card as png-->
+            <button class="download-button" onclick="downloadBingoCard()">Download as PNG</button>
+            <button class="download-button" onclick="downloadBingoCardsBulk(5)">Download 5 Bingo Cards</button>
             <!-- change background picture of bingo card-->
-            <button class="background-btn" onclick="changeBackground('images/flag.png')">Background 1</button>
-            <button class="background-btn" onclick="changeBackground('images/flag2.webp')">Background 2</button>
-            <button class="background-btn" onclick="changeBackground('background3.png')">Background 3</button>
+            <button class="background-button" onclick="changeBackground('images/flag.png')">Background 1</button>
+            <button class="background-button" onclick="changeBackground('images/flag2.webp')">Background 2</button>
+            <button class="background-button" onclick="changeBackground('background3.png')">Background 3</button>
+            <!-- reset bingo card-->
+            <button class="reset-button" onclick="resetBingoCard()">Reset Bingo Card</button>
         </div>
     </div>
     <div id="bingo-message" class="bingo-message"></div>
