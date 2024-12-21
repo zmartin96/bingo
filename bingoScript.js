@@ -31,6 +31,11 @@ function resetBingoCard() {
     document.getElementById('bingo-message').innerText = '';
     let background = ''; // default background image
     changeBackground(background);
+    updateCellSize(120); // default cell size
+    document.getElementById('search-bar').value = ''; // clear search bar
+    displayPolicyBank(); // display all policies
+    document.getElementById('bingo-card').style.backgroundImage = ''; // remove background image
+    document.getElementById('cell-size-slider').value = 120; // reset cell size slider
 }
 
 function highlightWinningPattern(pattern) {
@@ -53,17 +58,17 @@ function initialize() {
     generateBingoCard();
 }
 
-// call init function when the page is loaded
-document.addEventListener("DOMContentLoaded", () => {
-    if (policiesData.length > 0) {
-        initialize();
-    } else {
-        console.error('Please add policy data to the policiesData array.');
-        document.getElementById('bingo-message').innerText = 'No policy data available. Please add data.';
-    }
-});
+// // call init function when the page is loaded
+// document.addEventListener("DOMContentLoaded", () => {
+//     if (policiesData.length > 0) {
+//         initialize();
+//     } else {
+//         console.error('Please add policy data to the policiesData array.');
+//         document.getElementById('bingo-message').innerText = 'No policy data available. Please add data.';
+//     }
+// });
 
-let cellSize = 120; // cell size in pixels
+//let cellSize = 120; // cell size in pixels
 
 // generate a new bingo card
 function generateBingoCard() {
@@ -77,8 +82,6 @@ function generateBingoCard() {
     selectedPolicies.forEach(policy => {
         const cell = document.createElement('div');
         cell.className = 'cell';
-        cell.style.height = `${cellSize}px`;
-        cell.style.width = `${cellSize}px`;
         cell.innerHTML = `<strong>${policy.Policy}</strong>`;
         cell.title = policy.RelevantQuote ? `${policy.RelevantQuote} (${policy.Source})` : '';
         cell.onclick = () => toggleCell(cell);
@@ -90,6 +93,7 @@ function generateBingoCard() {
 function toggleCell(cell) {
     cell.classList.toggle('marked');
     checkForBingo();
+    saveState();
 }
 
 // check for bingo
@@ -103,34 +107,58 @@ function checkForBingo() {
         [0, 6, 12, 18, 24], [4, 8, 12, 16, 20]
     ];
     // for multiple bingos
-    let haswon=false;
-    // store winning patterns to highlight
-    let patterns = [];
-    // for each win pattern, check if all cells are marked
-    for (let pattern of winPatterns) {
-        if (pattern.every(index => marked[index] === 1)) {
-            patterns.push(pattern); // store winning pattern
-            haswon=true;
+    // let haswon=false;
+    // // store winning patterns to highlight
+    // let patterns = [];
+    // // for each win pattern, check if all cells are marked
+    // for (let pattern of winPatterns) {
+    //     if (pattern.every(index => marked[index] === 1)) {
+    //         patterns.push(pattern); // store winning pattern
+    //         haswon=true;
+    //     }
+    // }
+    // unHighlightCells(); // unhighlight all cells to remove previous win patterns that are no longer valid
+    // if(haswon){
+    //     for (let pattern of patterns) {
+    //         highlightWinningPattern(pattern); // highlight winning pattern for each win
+    //     }
+    //     // display bingo message
+    //     document.getElementById('bingo-message').innerText = '🎉 Bingo!\nYou won, we all lose! 🎉';
+    // }
+    // else{
+    //     // remove bingo message
+    //     document.getElementById('bingo-message').innerText = '';
+    // }
+
+    // Reset all highlights
+    Array.from(cells).forEach(cell => cell.classList.remove('highlight'));
+
+    let hasWon = false;
+    winPatterns.forEach(pattern => {
+        if (pattern.every(index => marked[index])) {
+            // if(!pattern.every(index => cells[index].classList.contains('highlight'))){
+            // pattern.forEach(index => {
+            //     if(cells[index].classList.contains('highlight')){
+            //         cells[index].classList.remove('highlight');
+            //     }
+            // });};
+            // setTimeout(function(){
+            //     pattern.forEach(index => cells[index].classList.add('highlight'));
+            // }, 2);
+            pattern.forEach(index => cells[index].classList.add('highlight'));
+            hasWon = true;
         }
-    }
-    unHighlightCells(); // unhighlight all cells to remove previous win patterns that are no longer valid
-    if(haswon){
-        for (let pattern of patterns) {
-            highlightWinningPattern(pattern); // highlight winning pattern for each win
-        }
-        // display bingo message
-        document.getElementById('bingo-message').innerText = '🎉 Bingo!\nYou won, we all lose! 🎉';
-    }
-    else{
-        // remove bingo message
-        document.getElementById('bingo-message').innerText = '';
-    }
+    });
+
+    const message = document.getElementById('bingo-message');
+    message.textContent = hasWon ? '🎉 Bingo!\nYou won, we all lose! 🎉' : '';
 
 }
 
 // change background image
 function changeBackground(background) {
     document.getElementById('bingo-card').style.backgroundImage = `url(${background})`;
+    saveState();
 }
 
 // download bingo card as image using html2canvas
@@ -211,6 +239,47 @@ function displayFilteredBank(filteredPolicies) {
         </div>
     `).join('<br><br>');
 }
+
+function uploadBackground() {
+    const input = document.getElementById('background-upload');
+    if (input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => changeBackground(e.target.result);
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function updateCellSize(size) {
+    document.documentElement.style.setProperty('--cell-size', `${size}px`);
+    document.getElementById('cell-size-display').textContent = `${size}px`;
+    // document.getElementById('bingo-card').style.gridAutoRows = `${size}px`;
+    // document.getElementById('bingo-card').style.gridAutoColumns = `${size}px`;
+    // document.getElementById('cell').style.height = `${size}px`;
+    // document.getElementById('cell').style.width = `${size}px`;
+    saveState();
+}
+
+function saveState() {
+    const cells = document.getElementsByClassName('cell');
+    const state = {
+        background: document.getElementById('bingo-card').style.backgroundImage,
+        cellSize: document.getElementById('cell-size-display').textContent
+    };
+    localStorage.setItem('bingoState', JSON.stringify(state));
+}
+
+function restoreState() {
+    const state = JSON.parse(localStorage.getItem('bingoState'));
+    if (state) {
+        changeBackground(state.background);
+        updateCellSize(parseInt(state.cellSize));
+        generateBingoCard();
+        displayPolicyBank();
+        checkForBingo();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', restoreState);
 
 // policy data
 let policiesData = [
