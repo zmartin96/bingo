@@ -123,13 +123,12 @@ button:hover {
 
 #bingo-message {
     position: relative;
-    top: 0px;
-    left: 0%;
     transform: translateX(0%);
     font-size: 22px;
     font-weight: bold;
     color: red;
     text-align: center;
+    margin: 2px 120px 2px -120px;
 }
 
 body::before {
@@ -208,4 +207,41 @@ body::before {
         flex-wrap: wrap;
         justify-content: center;
     }
+}
+
+#background-upload{
+    padding: 20px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #de6400;
+    color: white;
+}
+
+#background-upload:hover {
+    background-color: #b34d00;
+}
+
+#cell-size-slider{
+    padding: 0px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.label{
+    padding: 0px 20px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+#cell-size-display{
+    padding: 0px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
 }

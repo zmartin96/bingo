@@ -20,9 +20,9 @@
         store. If we are going to lose our rights, we might as well have fun doing it.
     </p>
     <h1>Bingo Card Generator</h1>
+    <div id="bingo-message"></div>
     <div class="container">
         <div id="bingo-card"></div>
-        <div id="bingo-message"></div>
         <div class="button-panel">
             <button onclick="generateBingoCard()">Generate Bingo Card</button>
             <button class="download-button" onclick="downloadBingoCard()">Download as PNG</button>
@@ -42,6 +42,8 @@
     <input type="text" id="search-bar" placeholder="Search policies..." onkeyup="filterPolicyBank()">
     <div id="policy-bank"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="bingoScript.js"></script>
 </body>
 </html>

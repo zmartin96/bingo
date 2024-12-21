@@ -1,26 +1,45 @@
-function downloadBingoCardsBulk(count) {
-    const zip = new JSZip();
-    const bingoCard = document.getElementById('bingo-card');
 
-    async function generateCardAndAddToZip(index) {
-        generateBingoCard();  // Generate a new card for each iteration
-        const canvas = await html2canvas(bingoCard, { backgroundColor: null });
-        const dataUrl = canvas.toDataURL().split(',')[1];
-        zip.file(`bingo_card_${index + 1}.png`, dataUrl, { base64: true });
+async function downloadBingoCardsBulk(numberOfCards) {
+    const zip = new JSZip(); // Create a new JSZip instance
+    const imgFolder = zip.folder("bingo_cards"); // Create a folder in the zip
+
+    for (let i = 0; i < numberOfCards; i++) {
+        // Regenerate the bingo card
+        generateBingoCard();
+
+        // Wait for the card to render and capture it
+        const imgData = await captureBingoCardAsImage();
+        const imgBase64 = imgData.split(',')[1]; // Extract base64 part
+
+        // Add the captured image to the ZIP file
+        imgFolder.file(`bingo_card_${i + 1}.png`, imgBase64, { base64: true });
     }
 
-    (async () => {
-        for (let i = 0; i < count; i++) {
-            await generateCardAndAddToZip(i);
-        }
-        zip.generateAsync({ type: "blob" }).then(content => {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(content);
-            link.download = "bingo_cards.zip";
-            link.click();
-        });
-    })();
+    // Generate and download the ZIP file after all cards are processed
+    zip.generateAsync({ type: "blob" }).then(content => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(content);
+        link.download = "bingo_cards.zip";
+        link.click();
+    });
 }
+
+// Function to capture the bingo card as an image
+function captureBingoCardAsImage() {
+    const bingoCard = document.getElementById('bingo-card');
+    var img = new Image();
+    return html2canvas(bingoCard, {
+        allowTaint: true,
+        useCORS: true
+    }).then(canvas => {
+        img=canvas.toDataURL("image/png");
+        //img.src=window.getComputedStyle(bingoCard).backgroundImag;
+        img.src=bingoCard.style.backgroundImage;
+        return img;
+    });
+}
+    
+
 
 function resetBingoCard() {
     const cells = document.getElementsByClassName('cell');
