@@ -73,7 +73,6 @@ function unHighlightCells(){
 
 // init bingo card and policy bank
 function initialize() {
-    displayPolicyBank();
     generateBingoCard();
 }
 
@@ -106,6 +105,8 @@ function generateBingoCard() {
         cell.onclick = () => toggleCell(cell);
         bingoCard.appendChild(cell);
     });
+    displayPolicyBank();
+
 }
 
 // toggle cell marking
@@ -296,6 +297,8 @@ function restoreState() {
         displayPolicyBank();
         checkForBingo();
     }
+    else 
+        initialize();
 }
 
 document.addEventListener('DOMContentLoaded', restoreState);
