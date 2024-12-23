@@ -313,7 +313,7 @@ let policiesData = [
     },
     {
         "Policy": "Merge Bureau of Labor Statistics with Census Bureau",
-        "RelevantQuote": "Not explicitly quoted but implied under administrative restructuring proposals.",
+        "RelevantQuote": "The Bureau of Economic Analysis and Census Bureau, as well as the Department of Labor’s Bureau of Labor Statistics, should be consolidated into a more manageable, focused, and efficient statistical agency",
         "Source": "Project 2025",
         "SourceLink": "https://www.project2025.org/policy/"
     },
@@ -343,8 +343,8 @@ let policiesData = [
     },
     {
         "Policy": "Banning TikTok",
-        "RelevantQuote": "Address TikTok’s threat to U.S. national security. A new Administration should ban the application on national security grounds.",
-        "Source": "Donald Trump Website",
+        "RelevantQuote": "Address TikTok’s threat to U.S. national security... a new Administration should ban the application on national security grounds.",
+        "Source": "Project 2025 (Page 851)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
@@ -499,33 +499,33 @@ let policiesData = [
     },
     {
         "Policy": "Cease All Programs Supporting Gender Transition",
-        "RelevantQuote": "We will cease all programs promoting sex and gender transitions at any age.",
-        "Source": "Donald Trump Website",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "Sign a new executive order instructing every federal agency to cease all programs that promote the concept of sex and gender transition at any age",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/president-trumps-plan-to-protect-children-from-left-wing-gender-insanity"
     },
     {
         "Policy": "Withdraw from the Paris Climate Accord Again",
-        "RelevantQuote": "We will once again withdraw from the Paris Climate Agreement, a disaster for the U.S. economy.",
-        "Source": "Archive.is",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "President Trump will once again exit the horrendously unfair Paris Climate Accords and oppose all of the radical left’s Green New Deal policies...",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-america-must-have-the-1-lowest-cost-energy-and-electricity-on-earth"
     },
     {
         "Policy": "Eliminate Funding for NPR",
-        "RelevantQuote": "We will eliminate funding for NPR and other public broadcasters that push leftist propaganda.",
-        "Source": "Archive.is",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "NO MORE FUNDING FOR NPR, A TOTAL SCAM!",
+        "Source": "Truth Social",
+        "SourceLink": "https://archive.is/HZwCs"
     },
     {
         "Policy": "Arrest Homeless People and Send to Tent Cities",
-        "RelevantQuote": "We will clean up our cities by building tent cities for the homeless and removing them from public spaces.",
-        "Source": "Archive.is",
+        "RelevantQuote": "Under my strategy, working with states, we will BAN urban camping wherever possible. Violators of these bans will be arrested",
+        "Source": "Donald Trump Website (AGENDA47)",
         "SourceLink": "https://www.project2025.org/policy/2"
     },
     {
         "Policy": "Restrict Voting to One Day",
         "RelevantQuote": "We will eliminate extended voting periods and require all voting to take place on Election Day only.",
-        "Source": "Rev.com",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Source": "Trump rally in Philadelphia",
+        "SourceLink": "https://www.rev.com/transcripts/donald-trump-rally-in-philadelphia"
     },
     {
         "Policy": "10% Tariff on All Foreign Goods",
@@ -547,15 +547,15 @@ let policiesData = [
     },
     {
         "Policy": "Construct Iron Dome-like Missile Defense System",
-        "RelevantQuote": "We will build an Iron Dome-style missile defense shield to protect the U.S. from incoming threats like hypersonic missiles.",
-        "Source": "Donald Trump Website",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "President Trump will work with Congress and our great military leaders to build a state-of-the-art, next generation missile defense shield, just as Israel is now protected by the Iron Dome.",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/president-trump-will-build-a-new-missile-defense-shield"
     },
     {
         "Policy": "Withdraw the U.S. from WHO",
-        "RelevantQuote": "We will completely withdraw from the World Health Organization, which has been a disaster for the U.S.",
-        "Source": "C-SPAN",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "I will withdraw from the WHO",
+        "Source": "Trump at CPAC",
+        "SourceLink": "https://www.c-span.org/program/campaign-2024/former-president-trump-speaks-at-cpac/624800"
     },    
     {
         "Policy": "Use public, taxpayer money for private religious schools",
@@ -576,12 +576,35 @@ let policiesData = [
         "SourceLink": "https://www.project2025.org/policy/2"
     },
     {
-        "Policy": "Redirect education funding to foreign",
-        "RelevantQuote": "require the Secretary of Education to allocate at least 40 percent of funding to international business programs that teach about free markets and economics and require institutions, faculty, and fellowship recipients to certify that they intend to further the stated statutory goals of serving American interests",
+        "Policy": "Redirect education funding to foreign programs",
+        "RelevantQuote": "Require the Secretary of Education to allocate at least 40 percent of funding to international business programs that teach about free markets and economics and require institutions, faculty, and fellowship recipients to certify that they intend to further the stated statutory goals of serving American interests",
         "Source": "Project 2025 (Page 356)",
         "SourceLink": "https://www.project2025.org/policy/2"
+    },
+    {
+        "Policy": "Persecute doctors who perform gender-affirming care",
+        "RelevantQuote": "I will support the creation of a private right of action for victims to sue doctors who have unforgivably performed these procedures",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://donaldjtrump.com/agenda47/president-trumps-plan-to-protect-children-from-left-wing-gender-insanity"
+    },
+    {
+        "Policy": "Restrict diverse perspectives to align with religious beliefs",
+        "RelevantQuote": "The Marxism being preached in our schools is also totally hostile to Judeo-Christian teachings, and in many ways, it is resembling an established new religion. Can’t let that happen.",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/president-trumps-plan-to-save-american-education-and-give-power-back-to-parents"
+    },
+    {
+        "Policy": "Remove references to “gender” and “reproducive health” from USAID",
+        "RelevantQuote": "Remove all references, examples, definitions, photos, and language on USAID websites, in agency publications and policies, and in all agency contracts and grants that include the following terms: “gender,” “gender equality,” “gender equity,” “gender diverse individuals,” “gender aware,” “gender sensitive,” etc. It should also remove references to “abortion,” “reproductive health,” and “sexual and reproductive rights” and controversial sexual education materials.",
+        "Source": "Project 2025 (Page 259)",
+        "SourceLink": "https://www.project2025.org/policy/2"
+    },
+    {
+        "Policy": "Disband NOAA and elimate research division",
+        "RelevantQuote": "The National Oceanographic and Atmospheric Administration (NOAA) should be dismantled and many of its functions eliminated",
+        "Source": "Project 2025 (Page 664)",
+        "SourceLink": "https://www.project2025.org/policy/2"
     }
-    // {
     //     "Policy": "",
     //     "RelevantQuote": "",
     //     "Source": "",

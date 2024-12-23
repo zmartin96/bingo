@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo Card Generator</title>
+    <!-- CSS style sheet -->
     <link rel="stylesheet" href="bingoStyleSheet.css">
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h3>Zach's All-American Bingo!</h3>
-    <p>
+    <h1 class="intro">Zach's All-American Bingo!</h1>
+    <p class="intro">
         People say that the 2024 election wasn't about policies, but that doesn't mean that it won't have an effect on the
         policies that are implemented in the next four years. I have spent the past year and a half sifting through policy
         proposals from <i>Project 2025</i> (yes, I hate
@@ -19,7 +23,7 @@
         instated. I have created a bingo card generator to help keep track of all the exciting new policies that are in
         store. If we are going to lose our rights, we might as well have fun doing it.
     </p>
-    <h1>Bingo Card Generator</h1>
+    <h1 class="title">Bingo Card Generator</h1>
     <div id="bingo-message"></div>
     <div class="container">
         <div id="bingo-card"></div>
@@ -27,7 +31,7 @@
             <button onclick="generateBingoCard()">Generate Bingo Card</button>
             <button class="download-button" onclick="downloadBingoCard()">Download as PNG</button>
             <button class="download-button" onclick="downloadBingoCardsBulk(5)">Download 5 Bingo Cards</button>
-            <button class="background-button" onclick="changeBackground('images/flag3.jpg')">Background 1</button>
+            <button class="background-button" onclick="changeBackground('images/flag.jpg')">Background 1</button>
             <button class="background-button" onclick="changeBackground('images/abstract.jpg')">Background 2</button>
             <button class="background-button" onclick="changeBackground('images/chaos.jpg')">Background 3</button>
             <input type="file" id="background-upload" accept="image/*" onchange="uploadBackground()">
