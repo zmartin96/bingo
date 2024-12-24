@@ -360,7 +360,7 @@ let policiesData = [
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
-        "Policy": "Eliminate National Institutes of Health Research on Embryonic Stem Cells",
+        "Policy": "Eliminate National Institute of Health's Research on Embryonic Stem Cells",
         "RelevantQuote": "End [the NIH's] human embryonic stem cell registry",
         "Source": "Project 2025 (Page 461)",
         "SourceLink": "https://www.project2025.org/policy/"
@@ -594,7 +594,7 @@ let policiesData = [
         "SourceLinkt": "https://www.youtube.com/watch?v=BfSAOPPSYC8"
     },
     {
-        "Policy": "Pardon and apologize to Jan 6 insurrectionists",
+        "Policy": "Pardon and apologize to January 6th insurrectionists",
         "RelevantQuote": "And I mean full pardons. To many, an apology. They've been so badly treated",
         "Source": "Wendy Bell Radio Interview",
         "SourceLink": "https://triblive.com/news/politics-election/wendy-bell-talks-with-trump-pardons-promised-to-jan-6-rioters/"
