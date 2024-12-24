@@ -601,7 +601,7 @@ let policiesData = [
     },
     {
         "Policy": "Appoint a special prosecutor to target the Biden family",
-        "RelevantQuote": "I WILL APPOINT A REAL SPECIAL \"PROSECUTOR\" TO GO AFTER THE MOST CORRUPT PRESIDENT IN THE HISTORY OF THE USA, JOE BIDEN, THE ENTIRE BIDEN CRIME FAMILY,",
+        "RelevantQuote": "I WILL APPOINT A REAL SPECIAL \"PROSECUTOR\" TO GO AFTER THE MOST CORRUPT PRESIDENT IN THE HISTORY OF THE USA, JOE BIDEN, THE ENTIRE BIDEN CRIME FAMILY",
         "Source": "Truth Social",
         "SourceLink": "https://archive.is/Arlk9"
     },
