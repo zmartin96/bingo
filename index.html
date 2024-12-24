@@ -31,9 +31,12 @@
             <button onclick="generateBingoCard()">Generate Bingo Card</button>
             <button class="download-button" onclick="downloadBingoCard()">Download as PNG</button>
             <button class="download-button" onclick="downloadBingoCardsBulk(5)">Download 5 Bingo Cards</button>
-            <button class="background-button" onclick="changeBackground('images/flag.jpg')">Background 1</button>
-            <button class="background-button" onclick="changeBackground('images/abstract.jpg')">Background 2</button>
-            <button class="background-button" onclick="changeBackground('images/chaos.jpg')">Background 3</button>
+            <button class="background-button" onclick="changeBackground('images/flag.jpg')" title="Photo By: Kaboompics.com (via pexels)">Background 1</button>
+            <!-- https://www.pexels.com/@karolina-grabowska/ -->
+            <button class="background-button" onclick="changeBackground('images/abstract.jpg')" title="Artwork by: Steve Johnson (via pexels)">Background 2</button>
+            <!-- https://www.pexels.com/@steve/ -->
+            <button class="background-button" onclick="changeBackground('images/chaos.jpg')" title="Artwork by: Ann H (via pexels)">Background 3</button>
+            <!-- https://www.pexels.com/@ann-h-45017/ -->
             <input type="file" id="background-upload" accept="image/*" onchange="uploadBackground()">
             <label for="cell-size-slider">Cell Size:</label>
             <input type="range" id="cell-size-slider" min="50" max="200" value="120" oninput="updateCellSize(this.value)">
@@ -43,11 +46,17 @@
     </div>
     
     <h2>Policy Bank</h2>
+    <!-- Search bar for filtering policies -->
     <input type="text" id="search-bar" placeholder="Search policies..." onkeyup="filterPolicyBank()">
+    <!-- Policy bank container -->
     <div id="policy-bank"></div>
+    <!-- script for downloading as png-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- scripts for downloading zip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- script for saving files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- JavaScript -->
     <script src="bingoScript.js"></script>
 </body>
 </html>

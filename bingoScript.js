@@ -76,18 +76,6 @@ function initialize() {
     generateBingoCard();
 }
 
-// // call init function when the page is loaded
-// document.addEventListener("DOMContentLoaded", () => {
-//     if (policiesData.length > 0) {
-//         initialize();
-//     } else {
-//         console.error('Please add policy data to the policiesData array.');
-//         document.getElementById('bingo-message').innerText = 'No policy data available. Please add data.';
-//     }
-// });
-
-//let cellSize = 120; // cell size in pixels
-
 // generate a new bingo card
 function generateBingoCard() {
     const bingoCard = document.getElementById('bingo-card');
@@ -205,29 +193,6 @@ function downloadBingoCard() {
         link.click();
     });
 }
-// function downloadBingoCard() {
-//     const background = document.getElementById('bingo-card').style.backgroundImage;
-//     const bingoCard = document.getElementById('bingo-card');
-//     const clone = bingoCard.cloneNode(true);
-
-//     // Append the clone off-screen to preserve layout
-//     clone.style.position = 'absolute';
-//     clone.style.left = '-9999px';
-//     document.body.appendChild(clone);
-
-//     html2canvas(clone, {
-//         useCORS: true, // Handle external images if needed
-//     }).then(canvas => {
-//         document.body.removeChild(clone); // Clean up the clone
-//         const link = document.createElement('a');
-//         const img= new Image();
-//         img.src = canvas.toDataURL(background);
-//         link.backgroundImage = background;
-//         link.download = 'bingo_card.png';
-//         link.href = canvas.toDataURL();
-//         link.click();
-//     });
-// }
 
 // filter policy bank based on search query
 function filterPolicyBank() {
@@ -260,6 +225,7 @@ function displayFilteredBank(filteredPolicies) {
     `).join('<br><br>');
 }
 
+// upload custom background image
 function uploadBackground() {
     const input = document.getElementById('background-upload');
     if (input.files[0]) {
@@ -269,6 +235,7 @@ function uploadBackground() {
     }
 }
 
+// change cell size based on slider value
 function updateCellSize(size) {
     document.documentElement.style.setProperty('--cell-size', `${size}px`);
     document.getElementById('cell-size-display').textContent = `${size}px`;
@@ -279,6 +246,7 @@ function updateCellSize(size) {
     saveState();
 }
 
+// save state to local storage
 function saveState() {
     const cells = document.getElementsByClassName('cell');
     const state = {
@@ -288,6 +256,7 @@ function saveState() {
     localStorage.setItem('bingoState', JSON.stringify(state));
 }
 
+// restore state from local storage
 function restoreState() {
     const state = JSON.parse(localStorage.getItem('bingoState'));
     if (state) {
@@ -298,34 +267,29 @@ function restoreState() {
         checkForBingo();
     }
     else 
-        initialize();
+        initialize(); // default state
 }
 
+// run restoreState when the DOM is loaded
 document.addEventListener('DOMContentLoaded', restoreState);
 
 // policy data
 let policiesData = [
     {
-        "Policy": "Processing Fees for Asylum Seekers",
-        "RelevantQuote": "The Trump administration’s proposal would impose a new fee for asylum seekers, dramatically increase existing fees, and eliminate many fee waivers.",
-        "Source": "AFSC",
-        "SourceLink": "https://archive.is/vrupo"
-    },
-    {
         "Policy": "Merge Bureau of Labor Statistics with Census Bureau",
         "RelevantQuote": "The Bureau of Economic Analysis and Census Bureau, as well as the Department of Labor’s Bureau of Labor Statistics, should be consolidated into a more manageable, focused, and efficient statistical agency",
-        "Source": "Project 2025",
+        "Source": "Project 2025 (Page 664)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Replace Department of State Employees in Leadership by 2025",
-        "RelevantQuote": "The next conservative Administration must replace leadership roles across federal agencies.",
-        "Source": "Project 2025",
+        "RelevantQuote": "The next Administration must take swift and decisive steps to reforge the department into a lean and functional diplomatic machine that serves the President",
+        "Source": "Project 2025 (Page 171)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Support Arctic Drilling",
-        "RelevantQuote": "Reinstate Trump’s plan for opening most of the National Petroleum Reserve of Alaska to leasing and development.",
+        "RelevantQuote": "Reinstate Trump's plan for opening most of the National Petroleum Reserve of Alaska to leasing and development.",
         "Source": "Project 2025 (Page 524)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
@@ -337,20 +301,20 @@ let policiesData = [
     },
     {
         "Policy": "Downsize EPA",
-        "RelevantQuote": "Limit EPA’s reliance on general rulemaking authority to ensure it is not abused to issue regulations for which EPA lacks substantive authority.",
-        "Source": "Project 2025 (Page 426)",
+        "RelevantQuote": "Limit EPA's reliance on CAA § 301 general rulemaking authority to ensure it is not abused to issue regulations for which EPA lacks substantive authority.",
+        "Source": "Project 2025 (Page 425)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Banning TikTok",
-        "RelevantQuote": "Address TikTok’s threat to U.S. national security... a new Administration should ban the application on national security grounds.",
+        "RelevantQuote": "Address TikTok's threat to U.S. national security... a new Administration should ban the application on national security grounds.",
         "Source": "Project 2025 (Page 851)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Encouraging Allies to Use Fossil Fuels",
-        "RelevantQuote": "Trump’s second-term energy strategy emphasizes promoting fossil fuel-based energy solutions over renewable energy.",
-        "Source": "Project 2025",
+        "RelevantQuote": "USAID should cease its war on fossil fuels in the developing world and support the responsible management of oil and gas reserves",
+        "Source": "Project 2025 (Page 257)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
@@ -361,44 +325,44 @@ let policiesData = [
     },
     {
         "Policy": "Restrict Stricter Vehicular Emissions by States",
-        "RelevantQuote": "Restore the position that California’s waiver applies only to issues like ground-level ozone, not global climate issues.",
-        "Source": "Project 2025 (Page 427)",
+        "RelevantQuote": "Restore the position that California's waiver applies only to issues like ground-level ozone, not global climate issues.",
+        "Source": "Project 2025 (Page 426)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Prevent CDC from Issuing Public Health Advice",
-        "RelevantQuote": "CDC guidelines are informative, not prescriptive, and should not dictate national policy.",
+        "RelevantQuote": "By statute or regulation, CDC guidance must be prohibited from taking on a prescriptive character",
         "Source": "Project 2025 (Page 454)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Ban Confucius Institutes",
-        "RelevantQuote": "Confucius Institutes, TikTok, and any other arm of Chinese propaganda and espionage should be outlawed.",
+        "RelevantQuote": "Confucius Institutes, TikTok, and any other arm of Chinese propaganda and espionage should be outlawed, not merely monitored.",
         "Source": "Project 2025 (Page 13)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Eliminate Office of Environmental Justice",
-        "RelevantQuote": "Not explicitly quoted in reviewed sections but aligns with environmental rollbacks under Project 2025.",
-        "Source": "Project 2025",
+        "RelevantQuote": "Returning the environmental justice function to the AO, eliminating the stand-alone Office of Environmental Justice and External Civil Rights",
+        "Source": "Project 2025 (Page 421)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Banning Any Gender-Affirming Care",
-        "RelevantQuote": "HRSA should withdraw all guidance encouraging Ryan White HIV/AIDS Program service providers to provide gender-affirming care.",
+        "RelevantQuote": "HRSA should withdraw all guidance encouraging Ryan White HIV/AIDS Program service providers to provide controversial \"gender transition\" procedures or \"gender-affirming care,\"",
         "Source": "Project 2025 (Page 486)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Restrict Federal Disaster Relief for States Violating Immigration Laws",
-        "RelevantQuote": "Congress should change the cost-share arrangement so that the federal government covers 25% for small disasters, incentivizing states to comply with immigration policies.",
-        "Source": "Project 2025 (Page 154)",
+        "RelevantQuote": " Congress should change the cost-share arrangement so that the federal government covers 25 percent of the costs for small disasters with the cost share reaching a maximum of 75 percent for truly catastrophic disasters.",
+        "Source": "Project 2025 (Page 153)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Eliminate National Institutes of Health Research on Embryonic Stem Cells",
-        "RelevantQuote": "NIH must not be allowed to use federal funding for controversial embryonic research.",
-        "Source": "Project 2025",
+        "RelevantQuote": "End [the NIH's] human embryonic stem cell registry",
+        "Source": "Project 2025 (Page 461)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
@@ -409,93 +373,93 @@ let policiesData = [
     },
     {
         "Policy": "Simplify Individual Income Taxes to Two Flat Tax Rates",
-        "RelevantQuote": "Introduce two flat tax rates to simplify and reduce the burden of individual income taxes.",
-        "Source": "General Trump Campaign Promise",
+        "RelevantQuote": "The Treasury should work with Congress to simplify the tax code by enacting a simple two-rate individual tax system",
+        "Source": "Project 2025 (Page 696)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Institute Work Requirements for SNAP",
         "RelevantQuote": "The Trump Administration proposed a Supplemental Nutrition Assistance Program (SNAP) rule to increase program integrity and reduce fraud, waste, and abuse.",
-        "Source": "Project 2025 (Page 477)",
+        "Source": "Project 2025 (Page 476)",
         "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Census Citizenship Question",
         "RelevantQuote": "Any successful conservative Administration must include a citizenship question in the census.",
-        "Source": "Project 2025 (Page 681)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Source": "Project 2025 (Page 680)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Abolishing the Department of Education",
         "RelevantQuote": "It is critical that the next Administration tackle this entrenched infrastructure.",
-        "Source": "Project 2025 (Page 324)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Source": "Project 2025 (Page 323)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Explicitly Rejecting Abortion as Healthcare",
-        "RelevantQuote": "Abortion is not health care, and states should be free to devise and implement programs that prioritize qualified providers.",
-        "Source": "Project 2025 (Page 473)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "Abortion is not health care, and states should be free to devise and implement programs that prioritize qualified providers",
+        "Source": "Project 2025 (Page 472)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Cut Medicare and Medicaid",
-        "RelevantQuote": "Medicaid... has evolved into a cumbersome, complicated, and unaffordable burden.",
+        "RelevantQuote": "Over the past 45 years, Medicaid and the health safety net have evolved into a cumbersome, complicated, and unaffordable burden",
         "Source": "Project 2025 (Page 466)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Shrink the Role of the National Labor Relations Board",
-        "RelevantQuote": "The NLRB should increase its use of 10(j) injunctive relief...but should ensure these powers are not used to favor union bosses.",
-        "Source": "Project 2025 (Page 602)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "The NLRB should return to the 2019 Alstate Maintenance interpretation of what does and does not constitute protected concerted activity",
+        "Source": "Project 2025 (Page 601)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Infusing Christian Nationalism into Policy",
-        "RelevantQuote": "The Judeo-Christian tradition has always recognized fruitful work as integral to human dignity.",
+        "RelevantQuote": "The Judeo-Christian tradition, stretching back to Genesis, has always recognized fruitful work as integral to human dignity",
         "Source": "Project 2025 (Page 581)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Use the Comstock Act for Abortion Pill Restrictions",
         "RelevantQuote": "HRSA should eliminate this potential abortifacient from the contraceptive mandate.",
-        "Source": "Project 2025 (Page 486)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Source": "Project 2025 (Page 485)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Rounding Up and Deporting All 'Illegal' Immigrants",
-        "RelevantQuote": "Trump plans to revoke Temporary Protected Status for beneficiaries.",
-        "Source": "PolitiFact",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "Carry out the largest domestic deportation operation in American history",
+        "Source": "Rally in Iowa",
+        "SourceLink": "https://www.youtube.com/watch?v=DzpehFlG4Yk"
     },
     {
         "Policy": "Defund Planned Parenthood",
-        "RelevantQuote": "Congress should pass the Protecting Life and Taxpayers Act to defund abortion providers such as Planned Parenthood.",
-        "Source": "Project 2025 (Page 473)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "Congress should pass the Protecting Life and Taxpayers Act, which would accomplish the goal of defunding abortion providers such as Planned Parenthood",
+        "Source": "Project 2025 (Page 472)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Title I Expiration",
-        "RelevantQuote": "Federal spending should be phased out over a 10-year period, and states should assume decision-making control.",
+        "RelevantQuote": "Over a 10-year period, the federal spending should be phased out and states should assume decision-making control",
         "Source": "Project 2025 (Page 350)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Eliminate Head Start",
         "RelevantQuote": "Eliminate the Head Start program.",
         "Source": "Project 2025 (Page 482)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Abolish the Consumer Financial Protection Bureau (CFPB)",
         "RelevantQuote": "Congress should abolish the CFPB and reverse Dodd–Frank Section 1061.",
         "Source": "Project 2025 (Page 839)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Abolish the FTC",
         "RelevantQuote": "Should the FTC Enforce Antitrust—or Even Continue to Exist?",
-        "Source": "Project 2025 (Page 873)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Source": "Project 2025 (Page 872)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Cease All Programs Supporting Gender Transition",
@@ -505,7 +469,7 @@ let policiesData = [
     },
     {
         "Policy": "Withdraw from the Paris Climate Accord Again",
-        "RelevantQuote": "President Trump will once again exit the horrendously unfair Paris Climate Accords and oppose all of the radical left’s Green New Deal policies...",
+        "RelevantQuote": "President Trump will once again exit the horrendously unfair Paris Climate Accords and oppose all of the radical left's Green New Deal policies...",
         "Source": "Donald Trump Website (AGENDA47)",
         "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-america-must-have-the-1-lowest-cost-energy-and-electricity-on-earth"
     },
@@ -519,31 +483,31 @@ let policiesData = [
         "Policy": "Arrest Homeless People and Send to Tent Cities",
         "RelevantQuote": "Under my strategy, working with states, we will BAN urban camping wherever possible. Violators of these bans will be arrested",
         "Source": "Donald Trump Website (AGENDA47)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-ending-the-nightmare-of-the-homeless-drug-addicts-and-dangerously-deranged"
     },
     {
         "Policy": "Restrict Voting to One Day",
-        "RelevantQuote": "We will eliminate extended voting periods and require all voting to take place on Election Day only.",
+        "RelevantQuote": "Our goal will be one day voting",
         "Source": "Trump rally in Philadelphia",
         "SourceLink": "https://www.rev.com/transcripts/donald-trump-rally-in-philadelphia"
     },
     {
         "Policy": "10% Tariff on All Foreign Goods",
-        "RelevantQuote": "We will institute a 10% universal tariff on all imports to protect American jobs and industries.",
-        "Source": "Fox Business",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "When companies come in and the dump their products in the United States, they should pay automatically, let's say a 10% tax.",
+        "Source": "FOX Business Interview",
+        "SourceLink": "https://www.foxbusiness.com/video/6334380407112"
     },
     {
-        "Policy": "25% Tariff on Cars from Mexico",
-        "RelevantQuote": "We will impose a 25% tariff on vehicles from Mexico to incentivize American production.",
-        "Source": "Archive.is",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "Policy": "25% Tariff on All goods from Canada and Mexico",
+        "RelevantQuote": "On January 20th, as one of my many first Executive Orders, I will sign all necessary documents to charge Mexico and Canada a 25% Tariff on ALL products coming into the United States, and its ridiculous Open Borders",
+        "Source": "Truth Social",
+        "SourceLink": "https://truthsocial.com/@realDonaldTrump/posts/113546215051155542"
     },
     {
         "Policy": "Eliminate Imports of Goods from China",
-        "RelevantQuote": "We will adopt a four-year plan to phase out all Chinese imports of essential goods to strengthen American manufacturing.",
-        "Source": "Archive.is",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "We will revoke China's Most Favored Nation trade status, and adopt a 4-year plan to phase out all Chinese imports of essential goods—everything from electronics to steel to pharmaceuticals",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-president-trumps-new-trade-plan-to-protect-american-workers"
     },
     {
         "Policy": "Construct Iron Dome-like Missile Defense System",
@@ -559,27 +523,27 @@ let policiesData = [
     },    
     {
         "Policy": "Use public, taxpayer money for private religious schools",
-        "RelevantQuote": "We will clean up our cities by building tent cities for the homeless and removing them from public spaces.",
-        "Source": "Project 2025",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "RelevantQuote": "All families should be able to take their children’s taxpayer-funded education dollars to the education providers of their choosing—whether it be a public school or a private school",
+        "Source": "Project 2025 (Page 347)",
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Teachers can not call students nicknames or use preferred pronouns",
         "RelevantQuote": "No public education employee or contractor shall use a name to address a student other than the name listed on a student’s birth certificate, without the written permission of a student’s parents or guardians.",
         "Source": "Project 2025 (Page 346)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Prevent the cancellation of student debt",
         "RelevantQuote": "The new Administration should urge the Congress to amend the HEA to abrogate, or substantially reduce, the power of the Secretary to cancel, compromise, discharge, or forgive the principal balances of Title IV student loans",
         "Source": "Project 2025 (Page 354)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Redirect education funding to foreign programs",
         "RelevantQuote": "Require the Secretary of Education to allocate at least 40 percent of funding to international business programs that teach about free markets and economics and require institutions, faculty, and fellowship recipients to certify that they intend to further the stated statutory goals of serving American interests",
         "Source": "Project 2025 (Page 356)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Persecute doctors who perform gender-affirming care",
@@ -597,15 +561,74 @@ let policiesData = [
         "Policy": "Remove references to “gender” and “reproducive health” from USAID",
         "RelevantQuote": "Remove all references, examples, definitions, photos, and language on USAID websites, in agency publications and policies, and in all agency contracts and grants that include the following terms: “gender,” “gender equality,” “gender equity,” “gender diverse individuals,” “gender aware,” “gender sensitive,” etc. It should also remove references to “abortion,” “reproductive health,” and “sexual and reproductive rights” and controversial sexual education materials.",
         "Source": "Project 2025 (Page 259)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
     },
     {
         "Policy": "Disband NOAA and elimate research division",
         "RelevantQuote": "The National Oceanographic and Atmospheric Administration (NOAA) should be dismantled and many of its functions eliminated",
         "Source": "Project 2025 (Page 664)",
-        "SourceLink": "https://www.project2025.org/policy/2"
+        "SourceLink": "https://www.project2025.org/policy/"
+    },
+    {
+        "Policy": "Repeal the 14th Amendment",
+        "RelevantQuote": "We're going to end [birthright citizenship] because it's ridiculous.",
+        "Source": "NBC Interview",
+        "SourceLink": "https://www.youtube.com/watch?v=b607aDHUu2I&t=16s"
+    },
+    {
+        "Policy": "Revoke legal status and deport Haitians in Springfield, Ohio",
+        "RelevantQuote": "I'd revoke [their temporary protected status], and I'd bring them back to their country",
+        "Source": "NewsNation Interview",
+        "SourceLink": "https://x.com/LibbeyDean_/status/1841650527219941768"
+    },
+    {
+        "Policy": "Deport college students who support Palestine",
+        "RelevantQuote": "18. DEPORT PRO-HAMAS RADICALS AND MAKE OUR COLLEGE CAMPUSES SAFE AND PATRIOTIC AGAIN",
+        "Source": "Donald Trump Website (Republican Party Platform)",
+        "SourceLink": "https://www.donaldjtrump.com/platform"
+    },
+    {
+        "Policy": "Weaponize military against American citizens and political opponents",
+        "RelevantQuote": "I think the bigger problem are the people from within... I think it should be very easily handled by, if necessary, by National Guard, or if really necessary, by the military...",
+        "Source": "FOX News Interview",
+        "SourceLinkt": "https://www.youtube.com/watch?v=BfSAOPPSYC8"
+    },
+    {
+        "Policy": "Pardon and apologize to Jan 6 insurrectionists",
+        "RelevantQuote": "And I mean full pardons. To many, an apology. They've been so badly treated",
+        "Source": "Wendy Bell Radio Interview",
+        "SourceLink": "https://triblive.com/news/politics-election/wendy-bell-talks-with-trump-pardons-promised-to-jan-6-rioters/"
+    },
+    {
+        "Policy": "Appoint a special prosecutor to target the Biden family",
+        "RelevantQuote": "I WILL APPOINT A REAL SPECIAL \"PROSECUTOR\" TO GO AFTER THE MOST CORRUPT PRESIDENT IN THE HISTORY OF THE USA, JOE BIDEN, THE ENTIRE BIDEN CRIME FAMILY,",
+        "Source": "Truth Social",
+        "SourceLink": "https://archive.is/Arlk9"
+    },
+    {
+        "Policy": "Revoke federal funding for schools with vaccine mandates",
+        "RelevantQuote": "I will not give one penny to any school that has a vaccine mandate",
+        "Source": "Rally in Wildwood, NJ",
+        "SourceLink": "https://www.c-span.org/program/campaign-2024/former-president-trump-campaigns-in-wildwood-new-jersey/641256"
+    },
+    {
+        "Policy": "Eliminate equity programs under the guise of anti-white discrimination",
+        "RelevantQuote": "I will direct the Department of Justice to pursue federal civil rights cases against schools that continue to engage in racial discrimination",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-protecting-students-from-the-radical-left-and-marxist-maniacs-infecting-educational-institutions"
+    },
+    {
+        "Policy": "Establish a restitution fund for people \"harmed\" by diversity, equity, and inclusion programs",
+        "RelevantQuote": "I will also urge Congress to create a restitution fund for Americans who have been unjustly discriminated against by these \"equity\" policies, and I will restore a merit-based federal civil service.",
+        "Source": "Donald Trump Website (AGENDA47)",
+        "SourceLink": "https://www.donaldjtrump.com/agenda47/agenda47-reversing-bidens-eo-embedding-marxism-in-the-federal-government"
+    },
+    {
+        "Policy": "Advocate for racial profiling in policing",
+        "RelevantQuote": "You have to do a policy of stop and frisk ... cause they have all these guns",
+        "Source": "FOX News Interview",
+        "SourceLink": "https://nation.foxnews.com/watch/4b26b71678ab11e91b47efc621838c42/"
     }
-    //     "Policy": "",
     //     "RelevantQuote": "",
     //     "Source": "",
     //     "SourceLink": ""
